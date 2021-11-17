@@ -2,11 +2,11 @@ package com.vova.mongodbdemo.web;
 
 import com.vova.mongodbdemo.model.Product;
 import com.vova.mongodbdemo.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -78,4 +78,12 @@ public class ProductController {
         }
         return ResponseEntity.status(NOT_FOUND).build();
     }
+
+    @GetMapping("/hello")
+    public ResponseEntity<Integer> hello(HttpSession session) {
+        Integer counter = productService.retrieveSession(session);
+
+        return ResponseEntity.ok(counter);
+    }
+
 }

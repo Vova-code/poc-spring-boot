@@ -5,6 +5,7 @@ import com.vova.mongodbdemo.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +38,20 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product findByName(String name) {
         return productDao.findByName(name);
+    }
+
+    @Override
+    public Integer retrieveSession(HttpSession session) {
+        Integer counter = (Integer) session.getAttribute("counter");
+        session.setMaxInactiveInterval(30);
+
+        if (counter == null) {
+            counter = 1;
+        } else {
+            counter += 1;
+        }
+
+        session.setAttribute("counter", counter);
+        return counter;
     }
 }

@@ -13,6 +13,4 @@ public interface ProductService {
     List<Product> findAll();
     Optional<Product> findById(String id);
     Product findByName(String name);
-
-    Integer retrieveSession(HttpSession session);
 }

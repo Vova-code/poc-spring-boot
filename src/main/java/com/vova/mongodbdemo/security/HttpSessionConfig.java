@@ -9,7 +9,7 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
 
 import java.time.Duration;
 
-@EnableMongoHttpSession(maxInactiveIntervalInSeconds = 60)
+@EnableMongoHttpSession(maxInactiveIntervalInSeconds = 6000)
 public class HttpSessionConfig {
 
     @Bean

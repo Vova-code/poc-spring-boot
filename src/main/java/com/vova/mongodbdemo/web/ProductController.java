@@ -1,13 +1,10 @@
 package com.vova.mongodbdemo.web;
 
 import com.vova.mongodbdemo.model.product.Product;
-import com.vova.mongodbdemo.service.product.ProductService;
+import com.vova.mongodbdemo.service.product.ProductServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpSession;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,29 +14,23 @@ import static org.springframework.http.HttpStatus.*;
 @RequestMapping("/api/product")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }
 
     @PostMapping
-    public ResponseEntity<Object> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Optional<Product>> addProduct(@RequestBody Product product) {
 
-        Product savedProduct = productService.add(product);
-        String savedProductId = savedProduct.getId();
+        try {
+            Product savedProduct = productService.add(product);
 
-        if (productService.findById(savedProductId).isPresent()) {
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/id/{id}")
-                    .buildAndExpand(savedProduct.getId())
-                    .toUri();
-
-            System.out.println(location);
-            return ResponseEntity.created(location).build();
+            return ResponseEntity.status(CREATED).body(productService.findById(savedProduct.getId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
-        return ResponseEntity.internalServerError().build();
     }
 
     @PutMapping

@@ -1,6 +1,6 @@
-package com.vova.mongodbdemo.service;
+package com.vova.mongodbdemo.service.product;
 
-import com.vova.mongodbdemo.model.Product;
+import com.vova.mongodbdemo.model.product.Product;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

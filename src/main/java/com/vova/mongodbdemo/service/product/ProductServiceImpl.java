@@ -1,7 +1,7 @@
-package com.vova.mongodbdemo.service;
+package com.vova.mongodbdemo.service.product;
 
-import com.vova.mongodbdemo.dao.ProductDao;
-import com.vova.mongodbdemo.model.Product;
+import com.vova.mongodbdemo.dao.product.ProductDao;
+import com.vova.mongodbdemo.model.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
+
+    private final ProductDao productDao;
 
     @Autowired
-    private ProductDao productDao;
+    public ProductServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
+    }
 
     @Override
     public Product add(Product product) {

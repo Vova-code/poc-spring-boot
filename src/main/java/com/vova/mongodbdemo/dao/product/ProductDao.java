@@ -1,6 +1,6 @@
-package com.vova.mongodbdemo.dao;
+package com.vova.mongodbdemo.dao.product;
 
-import com.vova.mongodbdemo.model.Product;
+import com.vova.mongodbdemo.model.product.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

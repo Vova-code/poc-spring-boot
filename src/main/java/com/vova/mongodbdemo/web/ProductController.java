@@ -1,7 +1,7 @@
 package com.vova.mongodbdemo.web;
 
-import com.vova.mongodbdemo.model.Product;
-import com.vova.mongodbdemo.service.ProductService;
+import com.vova.mongodbdemo.model.product.Product;
+import com.vova.mongodbdemo.service.product.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("product")
+@RequestMapping("/api/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -77,13 +77,6 @@ public class ProductController {
             return ResponseEntity.status(OK).body(retrievedProduct);
         }
         return ResponseEntity.status(NOT_FOUND).build();
-    }
-
-    @GetMapping("/hello")
-    public ResponseEntity<Integer> hello(HttpSession session) {
-        Integer counter = productService.retrieveSession(session);
-
-        return ResponseEntity.ok(counter);
     }
 
 }

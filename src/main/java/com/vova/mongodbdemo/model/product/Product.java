@@ -1,4 +1,4 @@
-package com.vova.mongodbdemo.model;
+package com.vova.mongodbdemo.model.product;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
